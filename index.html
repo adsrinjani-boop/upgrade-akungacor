@@ -90,66 +90,52 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   box-shadow: 0 30px 80px rgba(0, 0, 0, .65), 0 0 50px rgba(106, 44, 255, .22);
 }
 .topbar {
-  display: grid;
-  grid-template-columns: 145px minmax(0, 1fr) 120px;
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  text-align: center;
 }
 .logo {
-  width: 145px;
-  max-height: 82px;
+  display: block;
+  width: clamp(150px, 24vw, 220px);
+  max-width: 72%;
+  max-height: 105px;
+  margin: 0 auto;
   object-fit: contain;
   filter: drop-shadow(0 0 16px #ffbd26);
 }
-.brand-copy { min-width: 0; text-align: center; }
+.brand-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 .brand-copy small {
   color: var(--cyan);
-  font-size: 12px;
+  font-size: clamp(12px, 1.8vw, 16px);
   font-weight: 900;
-  letter-spacing: 3px;
+  line-height: 1.2;
+  letter-spacing: 2px;
   text-shadow: 0 0 12px #4ed8ff, 0 0 24px #754dff;
-}
-.brand-copy h1 {
-  margin: 3px 0;
-  color: transparent;
-  background: linear-gradient(180deg, #fff8b0 0%, #ffd32c 36%, #ff9b00 72%, #9b3c00 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  font-size: clamp(30px, 5vw, 48px);
-  line-height: 1;
-  filter: drop-shadow(0 3px 0 #5e1c00) drop-shadow(0 0 15px #ffb000);
 }
 .brand-copy p {
   margin: 6px 0 0;
   color: #fff3c1;
-  font-size: 12px;
+  font-size: clamp(10px, 1.5vw, 13px);
   font-weight: 800;
+  line-height: 1.35;
   text-shadow: 0 0 10px #822cff;
-}
-.demo-chip {
-  justify-self: end;
-  padding: 10px 13px;
-  border: 1px solid rgba(117, 221, 255, .33);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .04);
-  font-size: 12px;
-  white-space: nowrap;
-}
-.demo-chip span {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 6px;
-  border-radius: 50%;
-  background: #30ff99;
-  box-shadow: 0 0 10px #30ff99;
 }
 
 .premium-stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
-  width: min(760px, 100%);
+  width: min(520px, 100%);
   margin: 12px auto;
 }
 .jackpot-stat {
@@ -439,6 +425,30 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 #userid:focus { border-color: #fff; box-shadow: 0 0 18px var(--gold); }
 #userid::placeholder { color: #bdbdbd; }
+
+/* ===== VALIDASI USER ID ===== */
+#userid.input-error {
+  border-color: #ed2040 !important;
+  box-shadow: 0 0 15px rgba(237, 32, 64, .35) !important;
+  animation: shake .42s cubic-bezier(.36, .07, .19, .97) both;
+}
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+.input-warning {
+  width: min(380px, 100%);
+  margin: -12px auto 14px;
+  color: #ed2040;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(237, 32, 64, .45);
+  min-height: 20px;
+}
+
 .cek-premium, .register {
   position: relative;
   width: min(380px, 100%);
@@ -457,14 +467,51 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .cek-premium:active { transform: translateY(5px); }
 .register { margin-top: 8px; }
 .loading-card { width: min(420px, 100%); text-align: center; }
-.loader {
+
+/* ===== LOADING SPINNER SVG + PROGRESS BAR ===== */
+.svg-spinner {
   width: 72px;
   height: 72px;
-  margin: auto;
-  border: 6px solid rgba(255, 255, 255, .18);
-  border-top-color: var(--gold);
-  border-radius: 50%;
-  animation: spinloader .8s linear infinite;
+  margin: 0 auto 18px;
+}
+.svg-spinner circle {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.svg-spinner .track { stroke: rgba(255, 255, 255, .12); }
+.svg-spinner .arc {
+  stroke: var(--gold);
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: spinnerArc 1.4s ease-in-out infinite, spinnerRotate 1.4s linear infinite;
+  transform-origin: 36px 36px;
+}
+@keyframes spinnerArc {
+  0% { stroke-dashoffset: 151; }
+  50% { stroke-dashoffset: 37; }
+  100% { stroke-dashoffset: 151; }
+}
+@keyframes spinnerRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.progress-track {
+  width: min(320px, 100%);
+  height: 10px;
+  margin: 14px auto 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, .35);
+}
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff9d00, #ffd84c, #fff5a1);
+  box-shadow: 0 0 12px rgba(255, 184, 0, .55);
+  transition: width .25s linear;
 }
 
 #welcomePopup { z-index: 2000; display: grid; padding: 16px; }
@@ -499,20 +546,16 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 @keyframes removeSymbol { to { opacity: 0; transform: scale(.1) rotate(30deg); filter: blur(4px); } }
 @keyframes dropSymbol { from { opacity: .15; transform: translateY(-120px) scale(.82); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes stickyPulse { from { filter: brightness(1); } to { filter: brightness(1.22); } }
-@keyframes spinloader { to { transform: rotate(360deg); } }
 @keyframes silverGlow { 50% { filter: brightness(1.25); } }
 @keyframes fadeIn { from { opacity: 0; } }
 @keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(.97); } }
 @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
 
 @media (max-width: 800px) {
-  .topbar { grid-template-columns: 84px minmax(0, 1fr); gap: 8px; }
-  .logo { width: 84px; max-height: 60px; }
-  .brand-copy { padding-right: 84px; }
-  .brand-copy small { font-size: 9px; letter-spacing: 1.5px; }
-  .brand-copy h1 { font-size: clamp(27px, 8vw, 38px); }
-  .brand-copy p { font-size: 10px; }
-  .demo-chip { display: none; }
+  .topbar { gap: 6px; }
+  .logo { width: clamp(140px, 36vw, 190px); max-height: 88px; }
+  .brand-copy small { font-size: clamp(11px, 3.2vw, 14px); letter-spacing: 1.5px; }
+  .brand-copy p { font-size: clamp(9px, 2.7vw, 11px); }
   .premium-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; margin: 8px auto; }
   .jackpot-stat { aspect-ratio: 2.35 / 1; }
   .jackpot-content { top: 66%; }
@@ -522,11 +565,11 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 @media (max-width: 560px) {
   .app { align-items: start; padding: 6px; }
   .game-shell { padding: 8px; border-radius: 16px; }
-  .topbar { grid-template-columns: 62px minmax(0, 1fr); }
-  .logo { width: 62px; max-height: 52px; }
-  .brand-copy { padding-right: 62px; }
-  .brand-copy h1 { font-size: clamp(24px, 8.3vw, 32px); }
-  .brand-copy p { font-size: 9px; }
+  .topbar { gap: 5px; }
+  .logo { width: min(170px, 58vw); max-height: 78px; }
+  .brand-copy { width: 100%; padding-inline: 4px; }
+  .brand-copy small { letter-spacing: 1px; }
+  .brand-copy p { font-size: clamp(9px, 2.8vw, 11px); }
   .premium-stats { gap: 3px; margin: 5px auto 7px; }
   .jackpot-content strong { font-size: clamp(13px, 4.1vw, 18px); }
   .machine { padding: 7px; border-radius: 14px; }
@@ -551,9 +594,8 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 
 @media (max-width: 370px) {
-  .logo { display: none; }
-  .topbar { grid-template-columns: 1fr; }
-  .brand-copy { padding-right: 0; }
+  .logo { display: block; width: min(150px, 56vw); }
+  .brand-copy { padding-inline: 0; }
   .spin-sub { display: none; }
   .spin-btn { min-height: 56px; }
 }
@@ -597,11 +639,8 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 
         <div class="brand-copy">
           <small>GATES OF OLYMPUS</small>
-          <h1>RINJANI4D</h1>
           <p>UPGRADE AKUN VIP KAMU SPIN SEKARANG!</p>
         </div>
-
-        <div class="demo-chip"><span></span> AKUN VVIP</div>
       </header>
 
       <!-- STATISTIK 2x2 -->
@@ -671,7 +710,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
       <div class="modal-copy">
         <h2 id="modalTitle">SELAMAT!</h2>
         <p id="modalText">
-          AKUN KAMU SUDAH UPGRADE<br>
+          AKUN KAMU SUDAH BERHASIL DI-UPGRADE KE VVIP<br>
           LOGIN MELALUI LINK DIBAWAH ↓
         </p>
         <a href="https://rinjanichampion.com/" class="register">LOGIN SEKARANG →</a>
@@ -685,17 +724,24 @@ button:focus-visible, a:focus-visible, input:focus-visible {
       <button id="userModalClose" class="modal-close" type="button" aria-label="Tutup formulir">×</button>
       <h2 id="userModalTitle">UPGRADE AKUN VVIP</h2>
       <p>Masukkan USER ID</p>
-      <input type="text" id="userid" placeholder="Masukkan USER ID" autocomplete="off" inputmode="text" maxlength="40" aria-label="USER ID">
-      <button id="cekBtn" class="cek-premium" type="button">✨ CEK AKUN ✨</button>
+      <input type="text" id="userid" placeholder="Masukkan USER ID" autocomplete="off" inputmode="text" maxlength="40" aria-label="USER ID" aria-describedby="userIdWarning">
+      <p id="userIdWarning" class="input-warning" aria-live="polite"></p>
+      <button id="cekBtn" class="cek-premium" type="button">CEK AKUN</button>
     </div>
   </div>
 
   <!-- POPUP LOADING -->
   <div id="loadingModal" class="loading-modal" role="dialog" aria-modal="true" aria-labelledby="loadingTitle" aria-hidden="true">
     <div class="loading-card">
-      <div class="loader"></div>
+      <svg class="svg-spinner" viewBox="0 0 72 72" aria-hidden="true">
+        <circle class="track" cx="36" cy="36" r="24"></circle>
+        <circle class="arc" cx="36" cy="36" r="24"></circle>
+      </svg>
       <h2 id="loadingTitle">MEMERIKSA AKUN...</h2>
       <p id="loadingText">Mengecek USER ID...</p>
+      <div class="progress-track">
+        <div id="loadingProgress" class="progress-bar"></div>
+      </div>
     </div>
   </div>
 
@@ -741,8 +787,10 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   const resultModal = $("resultModal");
   const userModal = $("userModal");
   const userIdInput = $("userid");
+  const userIdWarning = $("userIdWarning");
   const loadingModal = $("loadingModal");
   const loadingText = $("loadingText");
+  const loadingProgress = $("loadingProgress");
 
   /* ============ STATE ============ */
   let board = [];
@@ -766,6 +814,32 @@ button:focus-visible, a:focus-visible, input:focus-visible {
     }
   }
 
+  /* ============ VALIDASI USER ID ============ */
+  function sanitizeUserId(value) {
+    return String(value || "").replace(/\s+/g, "");
+  }
+
+  function setInputError(show) {
+    if (!userIdInput) return;
+    if (show) userIdInput.classList.add("input-error");
+    else userIdInput.classList.remove("input-error");
+  }
+
+  function setWarning(text) {
+    if (userIdWarning) userIdWarning.textContent = text || "";
+  }
+
+  function clearValidation() {
+    setInputError(false);
+    setWarning("");
+  }
+
+  function validateUserId(value) {
+    const cleaned = sanitizeUserId(value);
+    return cleaned.length >= 3 ? { ok: true, value: cleaned } : { ok: false, value: cleaned };
+  }
+
+  /* ============ AUDIO ============ */
   let audioContext;
 
   function tone(frequency, duration, type = "sine", volume = 0.03) {
@@ -1018,10 +1092,11 @@ button:focus-visible, a:focus-visible, input:focus-visible {
     }
   }
 
-  function showResult() {
-    $("modalTitle").textContent = "SELAMAT!";
+  function showResult(userId) {
+    const displayId = sanitizeUserId(userId);
+    $("modalTitle").textContent = displayId ? `SELAMAT ${displayId}!` : "SELAMAT!";
     $("modalText").innerHTML =
-      "AKUN KAMU SUDAH UPGRADE,<br><strong>LOGIN MELALUI LINK DIBAWAH ↓</strong>";
+      "AKUN KAMU SUDAH BERHASIL DI-UPGRADE KE VVIP<br><strong>LOGIN MELALUI LINK DIBAWAH ↓</strong>";
 
     resultModal.classList.add("show");
     resultModal.setAttribute("aria-hidden", "false");
@@ -1031,24 +1106,37 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 
   async function checkUserLoading() {
     const steps = [
-      ["🔍 Mengecek USER ID...", 1200],
-      ["📡 Menghubungkan Server...", 1200],
-      ["🎯 Menganalisa Pola...", 1400],
-      ["🎰 Menyiapkan Spin...", 900]
+      "Mengecek USER ID...",
+      "Menghubungkan Server...",
+      "Menganalisa Pola...",
+      "Menyiapkan Spin..."
     ];
+    const totalTime = 4700;
+    const intervalTime = 80;
+    let elapsed = 0;
 
     loadingModal.classList.add("show");
     loadingModal.setAttribute("aria-hidden", "false");
-    for (const [text, wait] of steps) {
-      loadingText.textContent = text;
-      await sleep(wait);
-    }
+    if (loadingProgress) loadingProgress.style.width = "0%";
+
+    const progressTimer = setInterval(() => {
+      elapsed += intervalTime;
+      const pct = Math.min(100, Math.round((elapsed / totalTime) * 100));
+      if (loadingProgress) loadingProgress.style.width = `${pct}%`;
+      const stepIndex = Math.min(steps.length - 1, Math.floor((pct / 100) * steps.length));
+      if (loadingText) loadingText.textContent = steps[stepIndex];
+    }, intervalTime);
+
+    await sleep(totalTime);
+    clearInterval(progressTimer);
+    if (loadingProgress) loadingProgress.style.width = "100%";
+    await sleep(200);
     loadingModal.classList.remove("show");
     loadingModal.setAttribute("aria-hidden", "true");
   }
 
   /* ============ SPIN ============ */
-  async function spin() {
+  async function spin(userId) {
     if (spinning) return;
     spinning = true;
     spinBtn.disabled = true;
@@ -1078,7 +1166,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
         : "✨ Belum hoki. Tekan UPGRADE AKUN untuk mencoba lagi!"
     );
 
-    showResult();
+    showResult(userId);
     spinBtn.disabled = false;
     spinning = false;
   }
@@ -1117,20 +1205,53 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   /* ============ EVENT ============ */
   spinBtn.addEventListener("click", () => {
     userIdInput.value = "";
+    clearValidation();
     userModal.classList.add("show");
     userModal.setAttribute("aria-hidden", "false");
     setTimeout(() => userIdInput.focus(), 200);
   });
 
+  // Hapus spasi saat mengetik / paste
+  userIdInput.addEventListener("input", () => {
+    const cleaned = sanitizeUserId(userIdInput.value);
+    if (cleaned !== userIdInput.value) {
+      const start = userIdInput.selectionStart;
+      const end = userIdInput.selectionEnd;
+      userIdInput.value = cleaned;
+      userIdInput.selectionStart = start;
+      userIdInput.selectionEnd = end;
+    }
+    if (userIdInput.classList.contains("input-error")) clearValidation();
+  });
+
+  userIdInput.addEventListener("paste", event => {
+    event.preventDefault();
+    const pasted = sanitizeUserId((event.clipboardData || window.clipboardData).getData("text"));
+    const start = userIdInput.selectionStart || 0;
+    const end = userIdInput.selectionEnd || 0;
+    const current = userIdInput.value;
+    userIdInput.value = current.slice(0, start) + pasted + current.slice(end);
+    userIdInput.selectionStart = userIdInput.selectionEnd = start + pasted.length;
+    if (userIdInput.classList.contains("input-error")) clearValidation();
+  });
+
   $("cekBtn").addEventListener("click", async () => {
-    if (!userIdInput.value.trim()) {
-      alert("Masukkan USER ID terlebih dahulu");
+    const rawValue = userIdInput.value || "";
+    const check = validateUserId(rawValue);
+    if (rawValue !== check.value) userIdInput.value = check.value;
+
+    if (!check.ok) {
+      setInputError(true);
+      setWarning("User ID tidak boleh kosong atau mengandung spasi");
+      userIdInput.focus();
       return;
     }
+
+    clearValidation();
     userModal.classList.remove("show");
     userModal.setAttribute("aria-hidden", "true");
     await checkUserLoading();
-    await spin();
+    await spin(check.value);
   });
 
   function closeResultModal() {
