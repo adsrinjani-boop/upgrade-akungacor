@@ -204,20 +204,25 @@ linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size
 
 .welcome-box{
   position:relative;
-  width:min(900px,96vw);
+  max-width:min(900px,96vw);
   max-height:92vh;
 
-  display:flex;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
 }
 
+.welcome-box a{
+  display:block;
+  line-height:0;
+}
+
 .welcome-image{
   display:block;
-  width:100%;
+  width:auto;
+  max-width:min(900px,96vw);
   height:auto;
   max-height:88vh;
-  object-fit:contain;
 
   border-radius:20px;
   box-shadow:
@@ -229,7 +234,12 @@ linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size
   position:absolute;
   top:10px;
   right:10px;
-  z-index:10;
+  z-index:20;
+  pointer-events:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
 
   width:42px;
   height:42px;
@@ -250,7 +260,7 @@ linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size
   }
 
   .welcome-box{
-    width:98vw;
+    max-width:98vw;
   }
 
   .welcome-image{
