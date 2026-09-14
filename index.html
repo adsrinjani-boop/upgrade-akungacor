@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -9,69 +10,565 @@
   <link rel="icon" type="image/png" href="asset/logo-1607099285.png">
 
   <title>RINJANI4D — UPGRADE AKUN VIP</title>
-  <link rel="stylesheet" href="asset/style.css">
+
 
   <style>
-    .status-hidden{display:none !important}
+* { box-sizing: border-box; }
 
-    .livechat-btn{
-      position:relative;
-      overflow:hidden;
-      display:block;
-      width:min(360px,92%);
-      margin:18px auto 4px;
-      padding:15px 24px;
-      border:3px solid #9affbd;
-      border-radius:999px;
-      text-align:center;
-      text-decoration:none;
-      color:#fff;
-      font-size:22px;
-      font-weight:950;
-      letter-spacing:1.2px;
-      background:linear-gradient(180deg,#35d97b 0%,#10b95c 55%,#087c3c 100%);
-      box-shadow:
-        0 7px 0 #07582d,
-        0 0 18px rgba(32,255,123,.65),
-        0 0 38px rgba(25,220,105,.45),
-        inset 0 2px 0 rgba(255,255,255,.65);
-      animation:livechatPulse 1.1s ease-in-out infinite alternate;
-    }
+:root {
+  --gold: #ffd84c;
+  --gold-deep: #8d3d00;
+  --purple: #a83dff;
+  --cyan: #7ce3ff;
+  --ink: #070014;
+  --panel: #16043b;
+  --text: #ffffff;
+  --muted: #d6cce9;
+  --danger: #ed2040;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
 
-    .livechat-btn::before{
-      content:"";
-      position:absolute;
-      top:-70%;
-      left:-45%;
-      width:34%;
-      height:240%;
-      background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);
-      transform:rotate(22deg);
-      animation:livechatShine 2.2s linear infinite;
-    }
+html { color-scheme: dark; scroll-behavior: smooth; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(103, 39, 255, .52), transparent 34%),
+    linear-gradient(160deg, #05000d, #18043e 55%, #030008);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .15;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+button, input { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+}
 
-    .livechat-btn span{position:relative;z-index:2}
+#particles { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #8be7ff;
+  box-shadow: 0 0 14px #3acbff;
+  animation: float linear infinite;
+  will-change: transform;
+}
 
-    @keyframes livechatPulse{
-      from{transform:scale(1);filter:brightness(1)}
-      to{
-        transform:scale(1.045);
-        filter:brightness(1.12);
-        box-shadow:
-          0 7px 0 #07582d,
-          0 0 28px rgba(61,255,143,.9),
-          0 0 55px rgba(25,220,105,.7);
-      }
-    }
+.app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(8px, 2.2vw, 24px);
+}
+.game-shell {
+  width: min(900px, 100%);
+  padding: clamp(10px, 2vw, 18px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 216, 76, .42);
+  border-radius: clamp(16px, 3vw, 28px);
+  background: linear-gradient(180deg, rgba(21, 5, 58, .97), rgba(5, 1, 17, .98));
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .65), 0 0 50px rgba(106, 44, 255, .22);
+}
+.topbar {
+  display: grid;
+  grid-template-columns: 145px minmax(0, 1fr) 120px;
+  gap: 16px;
+  align-items: center;
+}
+.logo {
+  width: 145px;
+  max-height: 82px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px #ffbd26);
+}
+.brand-copy { min-width: 0; text-align: center; }
+.brand-copy small {
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-shadow: 0 0 12px #4ed8ff, 0 0 24px #754dff;
+}
+.brand-copy h1 {
+  margin: 3px 0;
+  color: transparent;
+  background: linear-gradient(180deg, #fff8b0 0%, #ffd32c 36%, #ff9b00 72%, #9b3c00 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1;
+  filter: drop-shadow(0 3px 0 #5e1c00) drop-shadow(0 0 15px #ffb000);
+}
+.brand-copy p {
+  margin: 6px 0 0;
+  color: #fff3c1;
+  font-size: 12px;
+  font-weight: 800;
+  text-shadow: 0 0 10px #822cff;
+}
+.demo-chip {
+  justify-self: end;
+  padding: 10px 13px;
+  border: 1px solid rgba(117, 221, 255, .33);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .04);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.demo-chip span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #30ff99;
+  box-shadow: 0 0 10px #30ff99;
+}
 
-    @keyframes livechatShine{
-      0%{left:-45%}
-      55%,100%{left:125%}
-    }
+.premium-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  width: min(760px, 100%);
+  margin: 12px auto;
+}
+.jackpot-stat {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 2.15 / 1;
+  overflow: hidden;
+}
+.jackpot-stat > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 0 7px rgba(255, 194, 0, .55)) drop-shadow(0 0 12px rgba(138, 45, 255, .38));
+}
+.jackpot-content {
+  position: absolute;
+  z-index: 2;
+  top: 70%;
+  left: 50%;
+  width: 62%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.jackpot-content strong {
+  display: block;
+  overflow: hidden;
+  color: var(--gold);
+  font-size: clamp(14px, 2.2vw, 24px);
+  font-weight: 900;
+  line-height: 1;
+  text-overflow: ellipsis;
+  text-shadow: 0 0 8px #ffb300, 0 0 18px rgba(255, 180, 0, .55);
+  white-space: nowrap;
+}
 
-    @media(max-width:520px){
-      .livechat-btn{font-size:18px;padding:14px 18px}
-    }
+.machine {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(8px, 1.5vw, 13px);
+  overflow: hidden;
+  border: clamp(2px, .35vw, 3px) solid #d64aff;
+  border-radius: clamp(15px, 3vw, 27px);
+  background: linear-gradient(160deg, #26065a, #0b0222);
+  box-shadow: inset 0 0 50px #5017a6, 0 18px 45px rgba(0, 0, 0, .53);
+}
+.machine::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 2px solid rgba(255, 216, 76, .6);
+  border-radius: clamp(12px, 2.5vw, 22px);
+  pointer-events: none;
+}
+.machine-shine {
+  position: absolute;
+  inset: -60%;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 43%, rgba(255, 255, 255, .1) 50%, transparent 57%);
+  animation: shine 4.5s linear infinite;
+  will-change: transform;
+}
+.reel-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(5, 1fr);
+  gap: clamp(3px, .7vw, 6px);
+  width: 100%;
+  margin: 0 auto;
+}
+.cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  aspect-ratio: 1.03;
+  overflow: hidden;
+  border: 1.5px solid #f05cff;
+  border-radius: clamp(5px, 1.2vw, 10px);
+  background: radial-gradient(circle at 50% 45%, #412079, #210d4d 70%, #10052a);
+  box-shadow: inset 0 0 22px #4e1b91, 0 0 8px #ff58ff;
+  contain: layout paint;
+}
+.cell img {
+  width: 74%;
+  height: 74%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, .53));
+  transition: transform .25s var(--ease-out), opacity .25s ease, filter .25s ease;
+  will-change: transform, opacity;
+}
+.cell.spinning img { animation: spinBlur .12s linear infinite; }
+.cell.winner { animation: winnerGlow .55s ease-in-out infinite alternate; }
+.cell.winner img { transform: scale(1.08); filter: drop-shadow(0 0 22px var(--gold)) brightness(1.22); }
+.cell.removing img { animation: removeSymbol .42s forwards; }
+.cell.dropping img { animation: dropSymbol .5s var(--ease-out); }
+.cell.multiplier {
+  border-color: var(--gold);
+  box-shadow: 0 0 19px #ff9d00, inset 0 0 26px #7b3000;
+}
+.cell.multiplier.sticky-lock { animation: stickyPulse .85s ease-in-out infinite alternate; }
+.cell.static-multiplier img {
+  transform: none;
+  filter: drop-shadow(0 0 15px #ffae00) brightness(1.12);
+  animation: none;
+}
+
+.controls {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin-top: 16px;
+}
+.spin-btn, .register-small, .cek-premium, .register, .livechat-btn {
+  transition: transform .18s var(--ease-out), filter .18s ease, box-shadow .18s ease;
+}
+.spin-btn {
+  position: relative;
+  min-width: min(365px, 100%);
+  min-height: 82px;
+  padding: 11px 26px;
+  overflow: hidden;
+  border: 3px solid #fff0a1;
+  border-radius: 999px;
+  color: #351600;
+  background: radial-gradient(circle at 50% 18%, #fffbd3 0%, #ffe266 24%, #ffb20b 55%, #e56b00 78%, #7d2900 100%);
+  box-shadow: 0 9px 0 var(--gold-deep), 0 14px 30px rgba(255, 151, 0, .55), 0 0 24px rgba(255, 220, 80, .8), inset 0 3px 0 rgba(255, 255, 255, .85);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.spin-btn::before, .cek-premium::before {
+  content: "";
+  position: absolute;
+  inset: -60% -25%;
+  background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, .75) 50%, transparent 58%);
+  transform: translateX(-65%);
+  animation: premiumButtonShine 2.6s linear infinite;
+}
+.spin-btn:hover { transform: translateY(-2px); filter: saturate(1.12) brightness(1.06); }
+.spin-btn:active { transform: translateY(6px); box-shadow: 0 3px 0 var(--gold-deep); }
+.spin-btn:disabled { opacity: .58; cursor: wait; filter: grayscale(.2); }
+.spin-main, .spin-sub { position: relative; z-index: 2; display: block; }
+.spin-main { color: #3a1600; font-size: 27px; font-weight: 900; letter-spacing: 2px; }
+.spin-sub { margin-top: 4px; color: #6a2b00; font-size: 10px; font-weight: 900; letter-spacing: .7px; }
+.register-small, .register, .livechat-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+}
+.register-small {
+  min-width: 120px;
+  padding: 13px 16px;
+  border: 2px solid #ffb28c;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #ff624b, #ec163d 56%, #990020);
+  box-shadow: 0 7px 0 #720016, 0 0 22px rgba(255, 44, 74, .55), inset 0 2px 0 rgba(255, 255, 255, .53);
+}
+.register-small span, .register-small small { display: block; }
+.register-small span { font-size: 17px; letter-spacing: 1.3px; }
+.register-small small { margin-top: 2px; color: #ffe8bd; font-size: 10px; }
+.register-small:hover, .register:hover, .livechat-btn:hover { transform: translateY(-2px); filter: brightness(1.12); }
+.status, .status-hidden {
+  min-height: 0;
+  margin: 14px auto 0;
+  color: #fff2aa;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.4;
+  text-align: center;
+}
+.status:not(:empty), .status-hidden:not(:empty) {
+  width: min(620px, 100%);
+  min-height: 22px;
+  padding: 9px 14px;
+  border: 1px solid rgba(255, 218, 76, .7);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(48, 13, 102, .92), rgba(17, 3, 45, .94));
+  box-shadow: 0 0 18px rgba(152, 68, 255, .45);
+}
+.livechat-btn {
+  width: min(320px, 90%);
+  min-height: 44px;
+  margin: 12px auto 2px;
+  border: 1px solid rgba(124, 227, 255, .65);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #243f7b, #102451);
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 14px;
+  padding: 13px 4px 0;
+  color: #a99fc7;
+  font-size: 11px;
+}
+
+.modal, .loading-modal, #welcomePopup {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  place-items: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 20px;
+  background: rgba(3, 0, 12, .82);
+  backdrop-filter: blur(8px);
+}
+.modal.show, .loading-modal.show { display: grid; animation: fadeIn .22s ease both; }
+.modal-card, .loading-card {
+  position: relative;
+  width: min(680px, 100%);
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  padding: clamp(22px, 4vw, 36px);
+  border: 2px solid var(--gold);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #24105d, #10032d);
+  box-shadow: 0 0 32px rgba(255, 157, 0, .65), 0 35px 90px #000;
+  animation: modalIn .35s var(--ease-out) both;
+}
+.modal-copy { text-align: center; }
+.modal-copy h2, .user-card h2, .loading-card h2 {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-size: clamp(28px, 6vw, 44px);
+  line-height: 1.08;
+}
+.modal-copy p, .user-card p, .loading-card p { margin: 8px 0 18px; font-size: clamp(16px, 2.3vw, 20px); line-height: 1.5; }
+.modal-close, .welcome-close {
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  place-items: center;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold);
+  background: #16042e;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.user-card { width: min(560px, 100%); text-align: center; }
+.user-card h2 {
+  padding-inline: 30px;
+  color: transparent;
+  background: linear-gradient(180deg, #fff 0%, #d8d8d8 35%, #fff 55%, #bdbdbd 78%, #ececec 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: silverGlow 2.8s infinite;
+}
+#userid {
+  display: block;
+  width: min(380px, 100%);
+  margin: 20px auto;
+  padding: 15px 18px;
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  outline: none;
+  color: var(--text);
+  background: linear-gradient(180deg, #2c124f, #16072d);
+  font-size: 17px;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(255, 210, 0, .18), inset 0 0 12px rgba(255, 255, 255, .06);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+#userid:focus { border-color: #fff; box-shadow: 0 0 18px var(--gold); }
+#userid::placeholder { color: #bdbdbd; }
+.cek-premium, .register {
+  position: relative;
+  width: min(380px, 100%);
+  padding: 15px 18px;
+  overflow: hidden;
+  border: 2px solid #ff9b87;
+  border-radius: 14px;
+  color: var(--text);
+  background: linear-gradient(180deg, #ff5c5c, #ff2038 55%, #c90029);
+  box-shadow: 0 7px 0 #87001b, 0 0 24px rgba(255, 70, 70, .5);
+  font-size: clamp(17px, 4vw, 21px);
+  font-weight: 900;
+  cursor: pointer;
+}
+.cek-premium:hover { transform: translateY(-2px); filter: brightness(1.1); }
+.cek-premium:active { transform: translateY(5px); }
+.register { margin-top: 8px; }
+.loading-card { width: min(420px, 100%); text-align: center; }
+.loader {
+  width: 72px;
+  height: 72px;
+  margin: auto;
+  border: 6px solid rgba(255, 255, 255, .18);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spinloader .8s linear infinite;
+}
+
+#welcomePopup { z-index: 2000; display: grid; padding: 16px; }
+#welcomePopup[hidden] { display: none; }
+.welcome-box { position: relative; width: min(900px, 100%); max-height: calc(100dvh - 32px); }
+.welcome-box a { display: block; line-height: 0; }
+.welcome-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100dvh - 32px);
+  border-radius: 18px;
+  object-fit: contain;
+  box-shadow: 0 0 25px rgba(255, 194, 0, .75), 0 0 60px rgba(121, 36, 255, .55);
+}
+.confetti-piece {
+  position: fixed;
+  z-index: 2100;
+  top: -20px;
+  width: 10px;
+  height: 18px;
+  border-radius: 2px;
+  animation: fall linear forwards;
+  will-change: transform;
+}
+
+@keyframes float { from { transform: translateY(110vh) scale(.3); } to { transform: translateY(-10vh) scale(1.5); } }
+@keyframes shine { from { transform: translateX(-35%); } to { transform: translateX(35%); } }
+@keyframes premiumButtonShine { to { transform: translateX(65%); } }
+@keyframes spinBlur { 0% { transform: translateY(-78px) scale(.74); filter: blur(6px); } 50% { transform: translateY(0) scale(1.08); filter: blur(2px); } 100% { transform: translateY(78px) scale(.74); filter: blur(6px); } }
+@keyframes winnerGlow { from { box-shadow: 0 0 10px #ffad00, inset 0 0 20px #6d2c00; } to { box-shadow: 0 0 28px #fff176, 0 0 42px #ff9d00, inset 0 0 30px rgba(255, 216, 76, .4); } }
+@keyframes removeSymbol { to { opacity: 0; transform: scale(.1) rotate(30deg); filter: blur(4px); } }
+@keyframes dropSymbol { from { opacity: .15; transform: translateY(-120px) scale(.82); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes stickyPulse { from { filter: brightness(1); } to { filter: brightness(1.22); } }
+@keyframes spinloader { to { transform: rotate(360deg); } }
+@keyframes silverGlow { 50% { filter: brightness(1.25); } }
+@keyframes fadeIn { from { opacity: 0; } }
+@keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(.97); } }
+@keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+@media (max-width: 800px) {
+  .topbar { grid-template-columns: 84px minmax(0, 1fr); gap: 8px; }
+  .logo { width: 84px; max-height: 60px; }
+  .brand-copy { padding-right: 84px; }
+  .brand-copy small { font-size: 9px; letter-spacing: 1.5px; }
+  .brand-copy h1 { font-size: clamp(27px, 8vw, 38px); }
+  .brand-copy p { font-size: 10px; }
+  .demo-chip { display: none; }
+  .premium-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; margin: 8px auto; }
+  .jackpot-stat { aspect-ratio: 2.35 / 1; }
+  .jackpot-content { top: 66%; }
+  .cell img { width: 82%; height: 82%; }
+}
+
+@media (max-width: 560px) {
+  .app { align-items: start; padding: 6px; }
+  .game-shell { padding: 8px; border-radius: 16px; }
+  .topbar { grid-template-columns: 62px minmax(0, 1fr); }
+  .logo { width: 62px; max-height: 52px; }
+  .brand-copy { padding-right: 62px; }
+  .brand-copy h1 { font-size: clamp(24px, 8.3vw, 32px); }
+  .brand-copy p { font-size: 9px; }
+  .premium-stats { gap: 3px; margin: 5px auto 7px; }
+  .jackpot-content strong { font-size: clamp(13px, 4.1vw, 18px); }
+  .machine { padding: 7px; border-radius: 14px; }
+  .machine::before { inset: 3px; border-width: 1px; }
+  .reel-grid { gap: 3px; }
+  .cell { border-width: 1px; border-radius: 5px; }
+  .controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin-top: 11px; }
+  .spin-btn { min-width: 0; width: 100%; min-height: 66px; padding: 8px 12px; border-width: 2px; }
+  .spin-main { font-size: clamp(18px, 5.2vw, 23px); letter-spacing: 1px; }
+  .spin-sub { font-size: 8px; letter-spacing: 0; }
+  .register-small { min-width: 82px; padding: 10px 8px; }
+  .register-small span { font-size: 14px; }
+  .status, .status-hidden { margin-top: 11px; font-size: 11px; }
+  .livechat-btn { min-height: 40px; margin-top: 10px; font-size: 13px; }
+  .footer { justify-content: center; padding-top: 10px; font-size: 9px; text-align: center; }
+  .modal, .loading-modal, #welcomePopup { padding: 8px; }
+  .modal-card, .loading-card { max-height: calc(100dvh - 16px); padding: 48px 18px 24px; border-radius: 16px; }
+  .welcome-box, .welcome-image { max-height: calc(100dvh - 16px); }
+  .welcome-image { border-radius: 12px; }
+  .modal-close, .welcome-close { top: 7px; right: 7px; width: 38px; height: 38px; font-size: 20px; }
+  .user-card h2 { padding-inline: 16px; }
+}
+
+@media (max-width: 370px) {
+  .logo { display: none; }
+  .topbar { grid-template-columns: 1fr; }
+  .brand-copy { padding-right: 0; }
+  .spin-sub { display: none; }
+  .spin-btn { min-height: 56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  #particles, .machine-shine { display: none; }
+}
+
   </style>
 </head>
 
@@ -80,7 +577,7 @@
   <!-- POPUP WELCOME -->
   <div id="welcomePopup" class="welcome-popup">
     <div class="welcome-box">
-      <button class="welcome-close" id="closeWelcome" type="button" aria-label="Tutup popup">✕</button>
+      <button class="welcome-close" id="closeWelcome" type="button" aria-label="Tutup popup" onclick="window.closeWelcomePopup(event)">✕</button>
 
       <a href="https://rinjanichampion.com/" aria-label="Welcome RINJANI4D">
         <img src="asset/welcome.png" class="welcome-image" alt="Welcome RINJANI4D">
@@ -167,7 +664,7 @@
   </main>
 
   <!-- POPUP HASIL -->
-  <div id="resultModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div id="resultModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-card">
       <button id="modalClose" class="modal-close" type="button" aria-label="Tutup hasil">×</button>
 
@@ -183,24 +680,508 @@
   </div>
 
   <!-- POPUP INPUT USER ID -->
-  <div id="userModal" class="modal" role="dialog" aria-modal="true">
+  <div id="userModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="userModalTitle" aria-hidden="true">
     <div class="modal-card user-card">
-      <h2>UPGRADE AKUN VVIP</h2>
+      <button id="userModalClose" class="modal-close" type="button" aria-label="Tutup formulir">×</button>
+      <h2 id="userModalTitle">UPGRADE AKUN VVIP</h2>
       <p>Masukkan USER ID</p>
-      <input type="text" id="userid" placeholder="Masukkan USER ID" autocomplete="off">
+      <input type="text" id="userid" placeholder="Masukkan USER ID" autocomplete="off" inputmode="text" maxlength="40" aria-label="USER ID">
       <button id="cekBtn" class="cek-premium" type="button">✨ CEK AKUN ✨</button>
     </div>
   </div>
 
   <!-- POPUP LOADING -->
-  <div id="loadingModal" class="loading-modal" role="dialog" aria-modal="true">
+  <div id="loadingModal" class="loading-modal" role="dialog" aria-modal="true" aria-labelledby="loadingTitle" aria-hidden="true">
     <div class="loading-card">
       <div class="loader"></div>
-      <h2>MEMERIKSA AKUN...</h2>
+      <h2 id="loadingTitle">MEMERIKSA AKUN...</h2>
       <p id="loadingText">Mengecek USER ID...</p>
     </div>
   </div>
 
-  <script src="asset/script.js"></script>
+  <script>
+(() => {
+  "use strict";
+
+  /* ============ KONFIGURASI ============ */
+  const ASSET = "asset/";
+
+  const NORMAL_SYMBOLS = [
+    "04_mahkota.png",
+    "05_permata_merah.png",
+    "06_permata_hijau.png",
+    "07_permata_ungu.png",
+    "08_jam_pasir.png",
+    "09_piala.png",
+    "10_cincin.png"
+  ].map(file => ASSET + file);
+
+  const MULTIPLIERS = [
+    { src: ASSET + "02_50x.png", value: 50, label: "50x" },
+    { src: ASSET + "03_250x.png", value: 250, label: "250x" }
+  ];
+
+  const COLS = 6;
+  const ROWS = 5;
+  const MIN_MATCH = 8;
+  const MAX_TUMBLE = 8;
+  const WIN_CHANCE = 0.85;
+  const MULTIPLIER_CHANCE = 0.035;
+
+  /* ============ ELEMEN ============ */
+  const $ = id => document.getElementById(id);
+
+  const gridEl = $("reelGrid");
+  const spinBtn = $("spinBtn");
+  const statusEl = $("status");
+  const spinCountEl = $("spinCount");
+  const tumbleCountEl = $("tumbleCount");
+  const multiplierTotalEl = $("multiplierTotal");
+  const demoWinEl = $("demoWin");
+  const resultModal = $("resultModal");
+  const userModal = $("userModal");
+  const userIdInput = $("userid");
+  const loadingModal = $("loadingModal");
+  const loadingText = $("loadingText");
+
+  /* ============ STATE ============ */
+  let board = [];
+  let spinCount = 0;
+  let currentTumbles = 0;
+  let currentMultiplier = 1;
+  let demoWin = 0;
+  let spinning = false;
+
+  /* ============ UTILITAS ============ */
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+  const randomItem = items => items[Math.floor(Math.random() * items.length)];
+  const setStatus = text => { if (statusEl) statusEl.textContent = text; };
+  const cellKey = (row, col) => `${row}-${col}`;
+  const getCellElement = (row, col) =>
+    gridEl.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+
+  function forEachCell(callback) {
+    for (let row = 0; row < ROWS; row += 1) {
+      for (let col = 0; col < COLS; col += 1) callback(row, col);
+    }
+  }
+
+  let audioContext;
+
+  function tone(frequency, duration, type = "sine", volume = 0.03) {
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      audioContext ||= new Ctx();
+      const context = audioContext;
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      oscillator.type = type;
+      oscillator.frequency.value = frequency;
+      gain.gain.value = volume;
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+      oscillator.start();
+      gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + duration);
+      oscillator.stop(context.currentTime + duration);
+    } catch (error) {
+      console.warn("Audio tidak tersedia:", error);
+    }
+  }
+
+  /* ============ PAPAN ============ */
+  const makeNormalCell = () => ({ type: "normal", src: randomItem(NORMAL_SYMBOLS) });
+
+  function makeRandomCell() {
+    if (Math.random() < MULTIPLIER_CHANCE) {
+      const multiplier = randomItem(MULTIPLIERS);
+      return { type: "multiplier", sticky: true, ...multiplier };
+    }
+    return makeNormalCell();
+  }
+
+  function shuffled(list) {
+    const items = [...list];
+    for (let i = items.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    return items;
+  }
+
+  function makeBoard(forceWin = false) {
+    const nextBoard = Array.from({ length: ROWS }, () =>
+      Array.from({ length: COLS }, makeRandomCell)
+    );
+
+    if (forceWin) {
+      const winningSymbol = randomItem(NORMAL_SYMBOLS);
+      const amount = MIN_MATCH + Math.floor(Math.random() * 5);
+      let inserted = 0;
+
+      for (const index of shuffled([...Array(ROWS * COLS).keys()])) {
+        if (inserted >= amount) break;
+        const row = Math.floor(index / COLS);
+        const col = index % COLS;
+        if (nextBoard[row][col].type === "multiplier") continue; // multiplier tidak ditimpa
+        nextBoard[row][col] = { type: "normal", src: winningSymbol };
+        inserted += 1;
+      }
+    }
+
+    return nextBoard;
+  }
+
+  /* ============ RENDER ============ */
+  function buildGrid() {
+    gridEl.innerHTML = "";
+    forEachCell((row, col) => {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.dataset.row = String(row);
+      cell.dataset.col = String(col);
+
+      const image = document.createElement("img");
+      image.alt = "Simbol";
+      image.loading = "lazy";
+      cell.appendChild(image);
+      gridEl.appendChild(cell);
+    });
+  }
+
+  function renderBoard(dropPositions = new Set()) {
+    forEachCell((row, col) => {
+      const cellEl = getCellElement(row, col);
+      const cell = board[row][col];
+      if (!cellEl || !cell) return;
+
+      cellEl.className = "cell";
+      cellEl.querySelector("img").src = cell.src;
+
+      if (cell.type === "multiplier") {
+        cellEl.classList.add("multiplier", "sticky-lock", "static-multiplier");
+      } else if (dropPositions.has(cellKey(row, col))) {
+        cellEl.classList.add("dropping");
+        setTimeout(() => cellEl.classList.remove("dropping"), 600);
+      }
+    });
+  }
+
+  const allPositions = () => {
+    const keys = new Set();
+    forEachCell((row, col) => keys.add(cellKey(row, col)));
+    return keys;
+  };
+
+  /* ============ KEMENANGAN ============ */
+  function findWins() {
+    const positionsBySymbol = new Map();
+
+    forEachCell((row, col) => {
+      const cell = board[row][col];
+      if (!cell || cell.type !== "normal") return;
+      if (!positionsBySymbol.has(cell.src)) positionsBySymbol.set(cell.src, []);
+      positionsBySymbol.get(cell.src).push({ row, col });
+    });
+
+    return [...positionsBySymbol.entries()]
+      .filter(([, positions]) => positions.length >= MIN_MATCH)
+      .map(([symbol, positions]) => ({ symbol, positions }));
+  }
+
+  function getStickyMultipliers() {
+    const multipliers = [];
+    forEachCell((row, col) => {
+      if (board[row][col]?.type === "multiplier") multipliers.push(board[row][col]);
+    });
+    return multipliers;
+  }
+
+  async function animateInitialSpin() {
+    const cells = [...gridEl.querySelectorAll(".cell")];
+    cells.forEach(cell => cell.classList.add("spinning"));
+
+    const timer = setInterval(() => {
+      cells.forEach(cell => {
+        cell.querySelector("img").src = randomItem(NORMAL_SYMBOLS);
+      });
+    }, 80);
+
+    await sleep(1150);
+    clearInterval(timer);
+    cells.forEach(cell => cell.classList.remove("spinning"));
+  }
+
+  async function highlightAndRemove(wins) {
+    const winningPositions = wins.flatMap(win => win.positions);
+    const mark = className =>
+      winningPositions.forEach(({ row, col }) =>
+        getCellElement(row, col)?.classList.add(className)
+      );
+
+    mark("winner");
+    setStatus(`🔥 ${winningPositions.length} simbol terhubung! Tumble dimulai...`);
+    tone(720, 0.25, "sine", 0.045);
+
+    await sleep(900);
+    mark("removing");
+    await sleep(480);
+
+    winningPositions.forEach(({ row, col }) => {
+      board[row][col] = null;
+    });
+  }
+
+  /*
+    STICKY TUMBLE:
+    - Multiplier tetap di koordinat yang sama dan membagi kolom jadi segmen.
+    - Hanya simbol normal yang jatuh dan mengisi lubang.
+  */
+  function collapseAndRefillSticky() {
+    const dropped = new Set();
+
+    for (let col = 0; col < COLS; col += 1) {
+      const multiplierRows = [];
+      for (let row = 0; row < ROWS; row += 1) {
+        if (board[row][col]?.type === "multiplier") multiplierRows.push(row);
+      }
+
+      const boundaries = [-1, ...multiplierRows, ROWS];
+
+      for (let s = 0; s < boundaries.length - 1; s += 1) {
+        const start = boundaries[s] + 1;
+        const end = boundaries[s + 1] - 1;
+        if (start > end) continue;
+
+        const survivors = [];
+        for (let row = end; row >= start; row -= 1) {
+          const cell = board[row][col];
+          if (cell?.type === "normal") survivors.push(cell);
+        }
+
+        for (let writeRow = end; writeRow >= start; writeRow -= 1) {
+          board[writeRow][col] = survivors.shift() ?? makeNormalCell();
+          dropped.add(cellKey(writeRow, col));
+        }
+      }
+    }
+
+    return dropped;
+  }
+
+  function applyStickyMultiplierOnce() {
+    const multipliers = getStickyMultipliers();
+    if (!multipliers.length) return;
+
+    const added = multipliers.reduce((sum, item) => sum + item.value, 0);
+    currentMultiplier = 1 + added;
+    multiplierTotalEl.textContent = `${currentMultiplier}×`;
+    setStatus(`⚡ ${multipliers.length} multiplier sticky aktif: +${added}×`);
+    tone(880, 0.35, "triangle", 0.05);
+  }
+
+  function addDemoScore(wins) {
+    const matched = wins.reduce((sum, win) => sum + win.positions.length, 0);
+    demoWin += matched * currentMultiplier;
+    demoWinEl.textContent = demoWin.toLocaleString("id-ID");
+  }
+
+  async function runTumbles() {
+    applyStickyMultiplierOnce();
+
+    for (let round = 0; round < MAX_TUMBLE; round += 1) {
+      const wins = findWins();
+      if (!wins.length) break;
+
+      currentTumbles += 1;
+      tumbleCountEl.textContent = String(currentTumbles);
+      addDemoScore(wins);
+
+      await highlightAndRemove(wins);
+      renderBoard(collapseAndRefillSticky());
+
+      setStatus(`✨ Tumble ${currentTumbles}: multiplier terkunci, simbol lain turun...`);
+      await sleep(800);
+    }
+  }
+
+  /* ============ EFEK & MODAL ============ */
+  function confetti() {
+    for (let i = 0; i < 65; i += 1) {
+      const piece = document.createElement("i");
+      piece.className = "confetti-piece";
+      piece.style.left = `${Math.random() * 100}vw`;
+      piece.style.background = `hsl(${Math.random() * 360} 90% 60%)`;
+      piece.style.animationDuration = `${2.2 + Math.random() * 2}s`;
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 4600);
+    }
+  }
+
+  function showResult() {
+    $("modalTitle").textContent = "SELAMAT!";
+    $("modalText").innerHTML =
+      "AKUN KAMU SUDAH UPGRADE,<br><strong>LOGIN MELALUI LINK DIBAWAH ↓</strong>";
+
+    resultModal.classList.add("show");
+    resultModal.setAttribute("aria-hidden", "false");
+    confetti();
+    tone(900, 0.45, "sine", 0.06);
+  }
+
+  async function checkUserLoading() {
+    const steps = [
+      ["🔍 Mengecek USER ID...", 1200],
+      ["📡 Menghubungkan Server...", 1200],
+      ["🎯 Menganalisa Pola...", 1400],
+      ["🎰 Menyiapkan Spin...", 900]
+    ];
+
+    loadingModal.classList.add("show");
+    loadingModal.setAttribute("aria-hidden", "false");
+    for (const [text, wait] of steps) {
+      loadingText.textContent = text;
+      await sleep(wait);
+    }
+    loadingModal.classList.remove("show");
+    loadingModal.setAttribute("aria-hidden", "true");
+  }
+
+  /* ============ SPIN ============ */
+  async function spin() {
+    if (spinning) return;
+    spinning = true;
+    spinBtn.disabled = true;
+
+    spinCount += 1;
+    currentTumbles = 0;
+    currentMultiplier = 1;
+    demoWin = 0;
+
+    spinCountEl.textContent = String(spinCount);
+    tumbleCountEl.textContent = "0";
+    multiplierTotalEl.textContent = "1×";
+    demoWinEl.textContent = "0";
+    setStatus("🎰 Mengacak simbol keberuntungan...");
+
+    await animateInitialSpin();
+
+    board = makeBoard(Math.random() < WIN_CHANCE);
+    renderBoard(allPositions());
+    await sleep(650);
+
+    await runTumbles();
+
+    setStatus(
+      currentTumbles > 0
+        ? `🏆 Selesai! ${currentTumbles} tumble • multiplier ${currentMultiplier}×`
+        : "✨ Belum hoki. Tekan UPGRADE AKUN untuk mencoba lagi!"
+    );
+
+    showResult();
+    spinBtn.disabled = false;
+    spinning = false;
+  }
+
+  /* ============ PARTIKEL ============ */
+  function buildParticles() {
+    const container = $("particles");
+    if (!container) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const particleCount = window.innerWidth < 600 ? 12 : 24;
+    for (let i = 0; i < particleCount; i += 1) {
+      const particle = document.createElement("i");
+      particle.className = "particle";
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${7 + Math.random() * 11}s`;
+      particle.style.animationDelay = `${-Math.random() * 14}s`;
+      container.appendChild(particle);
+    }
+  }
+
+  /* Penutup popup global: tetap bekerja walau listener lain gagal. */
+  window.closeWelcomePopup = function (event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    const popup = document.getElementById("welcomePopup");
+    if (!popup) return false;
+    popup.hidden = true;
+    popup.style.setProperty("display", "none", "important");
+    popup.setAttribute("aria-hidden", "true");
+    return false;
+  };
+
+  /* ============ EVENT ============ */
+  spinBtn.addEventListener("click", () => {
+    userIdInput.value = "";
+    userModal.classList.add("show");
+    userModal.setAttribute("aria-hidden", "false");
+    setTimeout(() => userIdInput.focus(), 200);
+  });
+
+  $("cekBtn").addEventListener("click", async () => {
+    if (!userIdInput.value.trim()) {
+      alert("Masukkan USER ID terlebih dahulu");
+      return;
+    }
+    userModal.classList.remove("show");
+    userModal.setAttribute("aria-hidden", "true");
+    await checkUserLoading();
+    await spin();
+  });
+
+  function closeResultModal() {
+    resultModal.classList.remove("show");
+    resultModal.setAttribute("aria-hidden", "true");
+  }
+
+  function closeUserModal() {
+    userModal.classList.remove("show");
+    userModal.setAttribute("aria-hidden", "true");
+    spinBtn.focus();
+  }
+
+  $("modalClose")?.addEventListener("click", closeResultModal);
+  $("userModalClose")?.addEventListener("click", closeUserModal);
+  resultModal.addEventListener("click", event => {
+    if (event.target === resultModal) closeResultModal();
+  });
+
+  userModal.addEventListener("click", event => {
+    if (event.target === userModal) closeUserModal();
+  });
+  userIdInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") $("cekBtn")?.click();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    if (resultModal.classList.contains("show")) closeResultModal();
+    else if (userModal.classList.contains("show")) closeUserModal();
+  });
+
+  const welcomePopup = $("welcomePopup");
+  const closeWelcome = $("closeWelcome");
+
+  if (welcomePopup) {
+    closeWelcome?.addEventListener("click", window.closeWelcomePopup);
+    welcomePopup.addEventListener("click", event => {
+      if (event.target === welcomePopup) window.closeWelcomePopup(event);
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && !welcomePopup.hidden) window.closeWelcomePopup(event);
+    });
+  }
+
+  /* ============ INIT ============ */
+  buildParticles();
+  buildGrid();
+  board = makeBoard(false);
+  renderBoard();
+})();
+
+  </script>
 </body>
 </html>
