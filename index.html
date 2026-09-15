@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -134,15 +135,15 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .premium-stats {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  width: min(520px, 100%);
-  margin: 12px auto;
+  gap: 12px;
+  width: min(720px, 100%); /* DIPERBESAR: Dari 520px ke 720px */
+  margin: 16px auto;
 }
 .jackpot-stat {
   position: relative;
   width: 100%;
   min-width: 0;
-  aspect-ratio: 2.15 / 1;
+  aspect-ratio: 2.3 / 1; /* DISESUAIKAN: Agar proporsi gambar lebih tinggi & pas */
   overflow: hidden;
 }
 .jackpot-stat > img {
@@ -157,9 +158,9 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .jackpot-content {
   position: absolute;
   z-index: 2;
-  top: 70%;
+  top: 68%; /* DISESUAIKAN: Posisi presisi di tengah box hitam */
   left: 50%;
-  width: 62%;
+  width: 70%;
   transform: translate(-50%, -50%);
   text-align: center;
 }
@@ -167,14 +168,13 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   display: block;
   overflow: hidden;
   color: var(--gold);
-  font-size: clamp(14px, 2.2vw, 24px);
+  font-size: clamp(16px, 2.8vw, 32px); /* DIPERBESAR: Ukuran font angka menyesuaikan box */
   font-weight: 900;
   line-height: 1;
   text-overflow: ellipsis;
   text-shadow: 0 0 8px #ffb300, 0 0 18px rgba(255, 180, 0, .55);
   white-space: nowrap;
 }
-
 .machine {
   position: relative;
   width: 100%;
@@ -330,12 +330,18 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   box-shadow: 0 0 18px rgba(152, 68, 255, .45);
 }
 .livechat-btn {
-  width: min(320px, 90%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;             /* Mengubah dari min(320px, 90%) agar melebar penuh */
+  max-width: 100%;
   min-height: 44px;
   margin: 12px auto 2px;
   border: 1px solid rgba(124, 227, 255, .65);
   border-radius: 12px;
   background: linear-gradient(180deg, #243f7b, #102451);
+  text-align: center;
+  box-sizing: border-box;
 }
 .footer {
   display: flex;
@@ -556,9 +562,15 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   .logo { width: clamp(140px, 36vw, 190px); max-height: 88px; }
   .brand-copy small { font-size: clamp(11px, 3.2vw, 14px); letter-spacing: 1.5px; }
   .brand-copy p { font-size: clamp(9px, 2.7vw, 11px); }
-  .premium-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; margin: 8px auto; }
-  .jackpot-stat { aspect-ratio: 2.35 / 1; }
-  .jackpot-content { top: 66%; }
+  .premium-stats { 
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
+    max-width: 100%; /* DIPERBESAR: Memanfaatkan seluruh lebar layar HP */
+    margin: 8px auto; 
+    gap: 6px;
+  }
+  .jackpot-stat { aspect-ratio: 2.3 / 1; } /* DISESUAIKAN: Agar proporsi gambar pas */
+  .jackpot-content { top: 68%; } /* DISESUAIKAN: Posisi teks angka di tengah box */
+  .jackpot-content strong { font-size: clamp(15px, 4.5vw, 22px); } /* DIPERBESAR: Ukuran angka di HP */
   .cell img { width: 82%; height: 82%; }
 }
 
